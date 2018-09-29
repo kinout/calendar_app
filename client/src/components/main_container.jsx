@@ -28,7 +28,7 @@ class MainContainer extends Component {
 
   createSchedule = (schedule) => {
     console.log(schedule);
-    axios.post('http://localhost:3001/calendar', {ymd: schedule.ymd, comment: schedule.comment})
+    axios.post('http://localhost:3001/calendar', { ymd: schedule.ymd, comment: schedule.comment })
       .then((response) => {
         const newData = update(this.state.schedules, { $push: [response.data] })
         this.setState({ schedules: newData })
@@ -38,11 +38,36 @@ class MainContainer extends Component {
       })
   }
 
+  deleateSchedule = (id) => {
+    axios.delete(`http://localhost:3001/calendar/${id}`)
+      .then((response) => {
+        const scheduleIndex = this.state.schedules.findIndex(x => x.id === id)
+        const deletedSchedules = update(this.state.schedules, { $splice: [[scheduleIndex, 1]] })
+        this.setState({ schedules: deletedSchedules })
+        console.log('set')
+      })
+      .catch((data) => {
+        console.log(data)
+      })
+  }
+
+  updateSchedule = (id, comment) => {
+    const scheduleIndex = this.state.schedules.findIndex(x => x.id === id)
+    axios.patch(`http://localhost:3001/calendar/${id}`, { ymd: this.state.schedules[scheduleIndex].ymd, comment: comment })
+      .then((response) => {
+        const schedules = update(this.state.schedules, { [scheduleIndex]: { $set: response.data } })
+        this.setState({ schedules: schedules })
+      })
+      .catch((data) => {
+        console.log(data)
+      })
+  }
+
   render() {
     return (
       <div className='app-main'>
-        <FormContainer createSchedule={this.createSchedule} />
-        <CalendarContainer scheduleData={this.state.schedules} />
+        <FormContainer hendleAdd={this.hendleAdd}  createSchedule={this.createSchedule} />
+        <CalendarContainer scheduleData={this.state.schedules} deleateSchedule={this.deleateSchedule} updateSchedule={this.updateSchedule} />
       </div>
     );
   }

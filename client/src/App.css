@@ -10,3 +10,15 @@
   font-size: large;
 }
 
+.app-main{
+  width:auto;
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+.deleteButton {
+  padding: 10px;
+  font-size: 20px;
+  color: red;
+}

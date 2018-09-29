@@ -7,7 +7,8 @@ class CalendarContainer extends Component {
       <div className='scheduleList'>
          {this.props.scheduleData.map((data) => {
            return(
-               <ViewContainer data={ data } key={ data.id } />
+              <ViewContainer data={ data } key={ data.id }
+              onDelete={this.props.deleateSchedule} onUpdate={this.props.updateSchedule}/>
            )
          })}
       </div>

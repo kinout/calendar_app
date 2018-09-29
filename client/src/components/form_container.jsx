@@ -33,9 +33,8 @@ class FormContainer extends Component {
         <form>
           <FormGroup controlId="formBasicText">
             <FormControl
-              type="text"
+              type="date"
               value={this.state.ymd}
-              placeholder="年月日"
               onChange={e => this.onChangeYmdtext(e)}
             />
             <FormControl
@@ -47,7 +46,7 @@ class FormContainer extends Component {
           </FormGroup>
 
         </form>
-        <Button type="submit" onClick={this.hundleSubmit}>更新</Button>
+        <Button type="submit" onClick={this.hundleSubmit}>登録</Button>
       </div>
     )
   }
