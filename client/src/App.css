@@ -27,3 +27,8 @@
   position: absolute;
   margin-top: 20%;
 }
+
+.required:after {
+  content: " *";
+  color: red;
+}

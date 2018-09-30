@@ -1,30 +1,30 @@
-import React, {Component} from "react";
-import { Modal, Button } from "react-bootstrap";
+import React, { Component } from "react";
+import { Modal } from "react-bootstrap";
+
+import FormContainer from './form_container';
 
 export default class ModalContainer extends Component {
-  render(){
-    return <div>
+  render() {
+    return (
       <div>
-        <Modal className="modal-container"
-               show={true}
-               onHide={this.props.handleHideModal}
-               animation={true}
-               bsSize="small">
+        <div>
+          <Modal className="modal-container"
+            show={true}
+            onHide={this.props.handleHideModal}
+            animation={true}
+            bsSize="small">
 
-          <Modal.Header closeButton>
-            <Modal.Title>Modal title</Modal.Title>
-          </Modal.Header>
+            <Modal.Header closeButton>
+              <Modal.Title>新規登録</Modal.Title>
+            </Modal.Header>
 
-          <Modal.Body>
-            One of fine body.........
-          </Modal.Body>
+            <Modal.Body>
+              <FormContainer createSchedule={this.props.createSchedule} />
+            </Modal.Body>
 
-          <Modal.Footer>
-            <Button onClick={this.props.handleHideModal}>Close</Button>
-            <Button bsStyle="primary">Save changes</Button>
-          </Modal.Footer>
-        </Modal>
+          </Modal>
+        </div>
       </div>
-    </div>;
+    )
   }
 }

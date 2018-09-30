@@ -7,7 +7,8 @@ class FormContainer extends Component {
     this.state = {
       title: "",
       start: "",
-      end: ""
+      end: "",
+      errorMsg: ""
     }
   }
 
@@ -16,6 +17,7 @@ class FormContainer extends Component {
   }
 
   onChangeStartText(e) {
+    this.state.errorMsg = "";
     this.setState({ start: e.target.value });
   }
 
@@ -24,6 +26,15 @@ class FormContainer extends Component {
   }
 
   hundleSubmit = () => {
+    this.state.errorMsg = "";
+    if(this.state.start.length === 0) {
+      this.setState({errorMsg: '開始日を入力してください'})
+      return
+    }
+    if(this.state.start > this.state.end ) {
+      this.setState({errorMsg: '開始日より後に終了日を設定してください'})
+      return
+    }
     const schedule = {
       title: this.state.title,
       start: this.state.start,
@@ -36,19 +47,23 @@ class FormContainer extends Component {
   render() {
     return (
       <div>
+        {this.state.errorMsg.length > 0 && <div className='alert alert-danger'>{this.state.errorMsg}</div>}
         <form>
           <FormGroup controlId="formBasicText">
+            <label>タイトル</label>
             <FormControl
               type="text"
               value={this.state.title}
               placeholder="タイトル"
               onChange={e => this.onChangeTitleText(e)}
             />
+            <label className='required'>開始日</label>
             <FormControl
               type="date"
               value={this.state.start}
               onChange={e => this.onChangeStartText(e)}
             />
+            <label>終了日</label>
             <FormControl
               type="date"
               value={this.state.end}

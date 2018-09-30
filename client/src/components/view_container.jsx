@@ -35,7 +35,6 @@ class ViewContainer extends Component {
         <span>
           <Button type="submit" onClick={this.handleUpdate}>更新</Button>
         </span>
-
       </div>
     )
   }

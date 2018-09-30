@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Moment from 'moment';
 
 import FullCalendar from 'fullcalendar-reactwrapper';
 import 'fullcalendar-reactwrapper/dist/css/fullcalendar.min.css';
@@ -8,7 +9,11 @@ import ModalContainer from "./modal_container";
 class CalendarViewContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { events: [], showModal: false };
+    this.state = {
+      events: [],
+      showModal: false,
+      selectedDate: ''
+    };
     this.handleHideModal = this.handleHideModal.bind(this);
     this.handleShowModal = this.handleShowModal.bind(this);
   }
@@ -28,7 +33,7 @@ class CalendarViewContainer extends Component {
         events.push({
           title: data.title != null ? data.title : '',
           start: data.start != null ? data.start : '',
-          end: data.end != null ? data.end : ''
+          end: data.end != null ? Moment(data.end).add(1, "days") : ''
         })
       )
     })
@@ -36,7 +41,7 @@ class CalendarViewContainer extends Component {
     const date = new Date();
     return (
       <div id="calendar-view-component">
-        {this.state.showModal ? <ModalContainer handleHideModal={this.handleHideModal} /> : null}
+        {this.state.showModal ? <ModalContainer handleHideModal={this.handleHideModal} createSchedule={this.props.createSchedule} /> : null}
         <FullCalendar
           id="your-custom-ID"
           header={{
@@ -81,6 +86,7 @@ class CalendarViewContainer extends Component {
           navLinks={true} // can click day/week names to navigate views
           editable={true}
           eventLimit={true} // allow "more" link when too many events
+          displayEventTime={false}
           events={this.state.events}
         />
       </div>

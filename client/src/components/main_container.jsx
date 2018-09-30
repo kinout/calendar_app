@@ -70,7 +70,7 @@ class MainContainer extends Component {
       <div className='app-main'>
         <FormContainer hendleAdd={this.hendleAdd}  createSchedule={this.createSchedule} />
         <CalendarContainer scheduleData={this.state.schedules} deleateSchedule={this.deleateSchedule} updateSchedule={this.updateSchedule} />
-        <CalendarViewContainer scheduleData={this.state.schedules} />
+        <CalendarViewContainer scheduleData={this.state.schedules} createSchedule={this.createSchedule} />
       </div>
     );
   }
