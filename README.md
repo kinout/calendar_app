@@ -1,12 +1,15 @@
 # README
 
-### FRONT: react
-       node 10.6.0
+### FRONT
+react
+node 10.6.0
        
-### SERVER: ruby 2.4.4
-        rails 5.2.1
+### SERVER
+ruby 2.4.4
+rails 5.2.1
         
-### DB: sqlite3 3.25.1
+### DB
+sqlite3 3.25.1
         
 ## Usage
 Ruby on Rails
