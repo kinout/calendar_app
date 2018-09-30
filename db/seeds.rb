@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 Schedule.create([
-    {ymd: "20181002", comment: "誕生日"},
-    {ymd: "20181004", comment: "呑み会"},
-    {ymd: "20181009", comment: "面接"}
+    {title: "誕生日", start: "2018-10-02"},
+    {title: "呑み会", start: "2018-10-04", end: "2018-10-20"},
+    {title: "納品日", start: "2018-10-11"}
   ])

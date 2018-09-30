@@ -5,7 +5,7 @@ class ViewContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      updateText: this.props.data.comment,
+      updateText: this.props.data.title
     }
   }
 
@@ -16,7 +16,6 @@ class ViewContainer extends Component {
 
   handleUpdate = () => {
     this.props.onUpdate(this.props.data.id, this.state.updateText)
-    this.setState({updateText: ''});
   }
 
   handleInput = (e) => {
@@ -24,9 +23,11 @@ class ViewContainer extends Component {
   }
 
   render() {
+    let isEnd = this.props.data.end !== null ? true : false;
     return (
       <div>
-        <span>予定日：{this.props.data.ymd}</span>        
+        <span>予定日：{this.props.data.start}</span>    
+        {isEnd && <span>～{this.props.data.end}</span>}    
         <span className='deleteButton' onClick={this.handleDeleate}>X</span>
         <span>
           <input type="text" value={this.state.updateText} onChange={e => this.handleInput(e)} />

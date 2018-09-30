@@ -5,13 +5,13 @@ class CalendarController < ApplicationController
     end
 
     def create
-      @data = Schedule.create({ymd: params[:ymd], comment: params[:comment]})
+      @data = Schedule.create({title: params[:title], start: params[:start], end: params[:end]})
       render json: @data
     end
     
     def update
       @data = Schedule.find(params[:id])
-      @data.update_attributes({ymd: params[:ymd], comment: params[:comment]})
+      @data.update_attributes({title: params[:title], start: params[:start], end: params[:end]})
       render json: @data
     end
     

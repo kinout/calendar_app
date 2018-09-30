@@ -5,26 +5,32 @@ class FormContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-        ymd: "",
-        comment: ""
+      title: "",
+      start: "",
+      end: ""
     }
   }
 
-  onChangeYmdtext(e) {
-    this.setState({ ymd: e.target.value });
+  onChangeTitleText(e) {
+    this.setState({ title: e.target.value });
   }
 
-  onChangeCmttext(e) {
-    this.setState({ comment: e.target.value });
+  onChangeStartText(e) {
+    this.setState({ start: e.target.value });
+  }
+
+  onChangeEndText(e) {
+    this.setState({ end: e.target.value });
   }
 
   hundleSubmit = () => {
     const schedule = {
-      ymd: this.state.ymd,
-      comment: this.state.comment
+      title: this.state.title,
+      start: this.state.start,
+      end: this.state.end
     }
     this.props.createSchedule(schedule);
-    this.setState({ymd: '', comment: ''});
+    this.setState({ title: '', start: '', end: '' });
   }
 
   render() {
@@ -33,15 +39,20 @@ class FormContainer extends Component {
         <form>
           <FormGroup controlId="formBasicText">
             <FormControl
-              type="date"
-              value={this.state.ymd}
-              onChange={e => this.onChangeYmdtext(e)}
+              type="text"
+              value={this.state.title}
+              placeholder="タイトル"
+              onChange={e => this.onChangeTitleText(e)}
             />
             <FormControl
-              type="text"
-              value={this.state.comment}
-              placeholder="コメント"
-              onChange={e => this.onChangeCmttext(e)}
+              type="date"
+              value={this.state.start}
+              onChange={e => this.onChangeStartText(e)}
+            />
+            <FormControl
+              type="date"
+              value={this.state.end}
+              onChange={e => this.onChangeEndText(e)}
             />
           </FormGroup>
 

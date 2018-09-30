@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap-theme.css';
 
 import CalendarContainer from './calendar_container';
 import FormContainer from './form_container';
-import CalendarViewComponent from './calendar_view_component';
+import CalendarViewContainer from './calendar_view_container';
 
 class MainContainer extends Component {
   constructor(props) {
@@ -29,7 +29,7 @@ class MainContainer extends Component {
 
   createSchedule = (schedule) => {
     console.log(schedule);
-    axios.post('http://localhost:3001/calendar', { ymd: schedule.ymd, comment: schedule.comment })
+    axios.post('http://localhost:3001/calendar', { title: schedule.title, start: schedule.start, end: schedule.end })
       .then((response) => {
         const newData = update(this.state.schedules, { $push: [response.data] })
         this.setState({ schedules: newData })
@@ -52,9 +52,10 @@ class MainContainer extends Component {
       })
   }
 
-  updateSchedule = (id, comment) => {
+  updateSchedule = (id, title) => {
     const scheduleIndex = this.state.schedules.findIndex(x => x.id === id)
-    axios.patch(`http://localhost:3001/calendar/${id}`, { ymd: this.state.schedules[scheduleIndex].ymd, comment: comment })
+    axios.patch(`http://localhost:3001/calendar/${id}`, { title: title,
+     start: this.state.schedules[scheduleIndex].start, end: this.state.schedules[scheduleIndex].end })
       .then((response) => {
         const schedules = update(this.state.schedules, { [scheduleIndex]: { $set: response.data } })
         this.setState({ schedules: schedules })
@@ -69,7 +70,7 @@ class MainContainer extends Component {
       <div className='app-main'>
         <FormContainer hendleAdd={this.hendleAdd}  createSchedule={this.createSchedule} />
         <CalendarContainer scheduleData={this.state.schedules} deleateSchedule={this.deleateSchedule} updateSchedule={this.updateSchedule} />
-        <CalendarViewComponent />
+        <CalendarViewContainer scheduleData={this.state.schedules} />
       </div>
     );
   }
