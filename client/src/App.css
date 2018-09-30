@@ -22,3 +22,8 @@
   font-size: 20px;
   color: red;
 }
+
+#calendar-view-component {
+  position: absolute;
+  margin-top: 20%;
+}

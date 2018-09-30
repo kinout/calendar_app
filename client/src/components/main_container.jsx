@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap-theme.css';
 
 import CalendarContainer from './calendar_container';
 import FormContainer from './form_container';
+import CalendarViewComponent from './calendar_view_component';
 
 class MainContainer extends Component {
   constructor(props) {
@@ -68,6 +69,7 @@ class MainContainer extends Component {
       <div className='app-main'>
         <FormContainer hendleAdd={this.hendleAdd}  createSchedule={this.createSchedule} />
         <CalendarContainer scheduleData={this.state.schedules} deleateSchedule={this.deleateSchedule} updateSchedule={this.updateSchedule} />
+        <CalendarViewComponent />
       </div>
     );
   }
