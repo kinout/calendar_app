@@ -25,3 +25,6 @@ React
 `yarn start`
 or
 `foreman start -p 3000`
+
+localhost:3000/
+
